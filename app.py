@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, render_template
+import os
 from openai import OpenAI
 
 app = Flask(__name__)
@@ -41,4 +42,6 @@ def chat():
         return jsonify({'error': 'Error al procesar la solicitud'}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Usar el puerto proporcionado por Render o el puerto 5000 como predeterminado
+    port = int(os.getenv("PORT", 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
